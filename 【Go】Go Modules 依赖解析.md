@@ -37,8 +37,8 @@ import (
 
 - GO111MODULE：1.14以后默认打开go module
 - GOPROXY：模块下载代理(常用GOPROXY="https://goproxy.cn,https://goproxy.io,direct" 
-	- 多个地址用`,`隔开
-	- direct用于Go 下载模块时遇到404或410时，自动尝试GOPROXY列表中下一个地址)
+	- 多个地址用`,`隔开。如果请求前一个时响应了404或410，那么自动fallback到下一个
+	- direct的作用是直接回源（源指的是比如 GitHub 这种代码托管服务）拉取代码
 - GOSUMDB： 用于指定检验模块包的数据库，默认值是sum.golang.org。该服务可以用来查询依赖包指定版本的哈希值，保证拉取到的模块版本数据没有经过篡改。
 - GONOPROXY：私有模块放在私有开发仓库时，指定该环境变量避免代理
 	- 例如 server项目中 hypers-tool模块下载：GONOPROXY="gitlab.hypers.com"
