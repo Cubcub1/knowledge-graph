@@ -80,8 +80,18 @@ db.inventory.find( { item : { $exists: false } } )
 
 ## update
 
+>无论匹配多少条，只更新第一条
 `db.collection.updateOne(<filter>, [ { f1:v,f2:v } ] | [ {operator: { f1:v1,f2:v2 }} ])`
+
+>匹配多少条，更新多少条
 `db.collection.updateMany()`
+
+updateOne/updateMany 必须包含以下操作服
+- `$set/$unsert`
+- `$push/$pushAll/$pop`
+- `$pull/$pullAll`
+- `$addToSet`
+![](https://cdn.jsdelivr.net/gh/Cubcub1/ImageRepo/obsidian/202211221809605.png)
 
 更新语句中 的数组，按照流水线形式顺序执行 
 -   [`$addFields`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#mongodb-pipeline-pipe.-addFields)
@@ -91,3 +101,18 @@ db.inventory.find( { item : { $exists: false } } )
 -   [`$replaceRoot`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceRoot/#mongodb-pipeline-pipe.-replaceRoot)
 -   [`$replaceWith`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceWith/#mongodb-pipeline-pipe.-replaceWith)
 
+
+## delete
+
+`db.collection.remove({f:v})`: 删除满足条件的记录
+`db.collection.remove({})`: 删除所有记录
+
+`db.collection.drop()`: 删表
+
+`db.dropDatbase()`:删库
+
+
+## 常用操作
+
+使用投影（projection）返回 想要的字段
+`db.collection.find({},{"_id":0,"title":1})` : 返回符合条件的title字段
